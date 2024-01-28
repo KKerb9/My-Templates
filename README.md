@@ -1,2 +1,2 @@
-# teambook
-competative programming
+# My-Templates
+Мои шаблоны для олимпиадного программирования
