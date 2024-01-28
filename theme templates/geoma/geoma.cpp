@@ -57,11 +57,11 @@ bool grt (ld a, ld b) {
 }
 
 bool smleq (ld a, ld b) {
-    return a + EPS <= b;
+    return a - EPS <= b;
 }
 
 bool grteq (ld a, ld b) {
-    return a - EPS >= b;
+    return a + EPS >= b;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -125,7 +125,8 @@ ld angle (pt& a, pt& b) {
     return atan2(a % b, a ^ b);
 }
 
-#define ve pt;
+//#define ve pt;
+using ve = pt;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
