@@ -15,6 +15,7 @@ using pr = pair<T1, T2>;
 int t = 1;
 
 const ld EPS = 1e-8;
+const ld PI = 3.141592653589793;
 
 #ifdef LOCAL 
     #define fi freopen("input.txt", "r", stdin)
@@ -37,7 +38,7 @@ const ld EPS = 1e-8;
 int sgn (ld a) {
     if (a > EPS) {
         return 1;
-    } else if (a < EPS) {
+    } else if (a < -EPS) {
         return -1;
     } else {
         return 0;
@@ -137,7 +138,28 @@ struct line {
     line () = default;
     line (ld a, ld b, ld c ) : a(a), b(b), c(c) {
     }
+    line (pt& a, pt& b) : a(a.y - b.y), b(b.x - a.x), c(a.x * b.y - a.y * b.x) {   
+    }
+
+    bool operator== (const line& other) const {
+        return (eq(a * other.b, b * other.a) && eq(a * other.c, other.a * c) && eq(b * other.c, c * other.b));
+    }
 };
+
+bool are_parallel (line f1, line f2) {
+    pt p1(-f1.b, f1.a);
+    pt p2(-f2.b, f2.a);
+    return sgn(p1 % p2) == 0;
+}
+
+pr<int, pt> are_intersect (line f1, line f2) {
+    if (are_parallel(f1, f2)) {
+        if (f1 == f2) return {2, pt()};
+        return {0, pt()};
+    }
+    ld d = f2.a * f1.b - f1.a * f2.b;
+    return {1, pt(((-1 * f2.b * f1.c - f2.c * f1.b) / d), (f2.c * f1.a + f1.c * f2.a) / d)};
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
