@@ -15,7 +15,6 @@ using pr = pair<T1, T2>;
 int t = 1;
 
 const ld EPS = 1e-8;
-const ld PI = 3.141592653589793;
 
 #ifdef LOCAL 
     #define fi freopen("input.txt", "r", stdin)
@@ -112,6 +111,9 @@ struct pt {
     }
 };
 
+//#define ve pt;
+using ve = pt;
+
 istream& operator>> (istream& in, pt& x) {
     in >> x.x >> x.y;
     return in;
@@ -126,8 +128,19 @@ ld angle (pt& a, pt& b) {
     return atan2(a % b, a ^ b);
 }
 
-//#define ve pt;
-using ve = pt;
+bool is_pt_on_seg (const pt& a, const pt& b, const pt& p) {
+    if (a == b) {
+        return a == p;
+    }
+    ve ab(a, b), ap(a, p), ba(b, a), bp(b, p);
+    if (sgn(ab % ap) != 0) {
+        return false;
+    }
+    if (sgn(ap ^ ab) >= 0 && sgn(ba ^ bp) >= 0) {
+        return true;
+    }
+    return false;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -138,18 +151,26 @@ struct line {
     line () = default;
     line (ld a, ld b, ld c ) : a(a), b(b), c(c) {
     }
-    line (pt& a, pt& b) : a(a.y - b.y), b(b.x - a.x), c(a.x * b.y - a.y * b.x) {   
+    line (pt p1, pt p2) : a(p1.y - p2.y), b(p2.x - p1.x), c(-1 * p1.x * a - b * p1.y) {  
+        normalize(); 
+    }
+
+    void normalize () {
+        ld n = sqrt(a * a + b * b);
+        assert(sgn(n) == 1);
+        a /= n;
+        b /= n;
+        c /= n;
     }
 
     bool operator== (const line& other) const {
-        return (eq(a * other.b, b * other.a) && eq(a * other.c, other.a * c) && eq(b * other.c, c * other.b));
+        return eq(a * other.b, b * other.a) && eq(a * other.c, other.a * c) && eq(b * other.c, c * other.b);
     }
 };
 
+
 bool are_parallel (line f1, line f2) {
-    pt p1(-f1.b, f1.a);
-    pt p2(-f2.b, f2.a);
-    return sgn(p1 % p2) == 0;
+    return sgn(f1.a * f2.b - f1.b * f2.a) == 0;
 }
 
 pr<int, pt> are_intersect (line f1, line f2) {
@@ -158,7 +179,20 @@ pr<int, pt> are_intersect (line f1, line f2) {
         return {0, pt()};
     }
     ld d = f2.a * f1.b - f1.a * f2.b;
-    return {1, pt(((-1 * f2.b * f1.c - f2.c * f1.b) / d), (f2.c * f1.a + f1.c * f2.a) / d)};
+    ld x = f2.b * f1.c - f2.c * f1.b;
+    ld y = f2.c * f1.a - f1.c * f2.a;
+    return {1, pt(x / d, y / d)};
+}
+
+ld pt_to_line (const line& f, const pt& p) {
+    return abs(f.a * p.x + f.b * p.y + f.c) / sqrt(f.a * f.a + f.b * f.b);
+}
+
+pt symmetrical_pt (const line& f, const pt& p) {
+    ld d = 2 * (f.a * p.x + f.b * p.y + f.c) / (f.a * f.a + f.b * f.b);
+    ld x = p.x - d * f.a;
+    ld y = p.y - d * f.b;
+    return pt(x, y);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
