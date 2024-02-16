@@ -6,6 +6,12 @@
 // #define int long long
 #define all(x) x.begin(), x.end()
 
+#include <ext/pb_ds/assoc_container.hpp>
+
+using namespace __gnu_pbds;
+
+using ordered_set = tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update>;
+
 using namespace std;
 using ll = long long;
 using ull = unsigned long long;
@@ -40,7 +46,7 @@ void prerun () {
     fi; fo; ct; cd;
 }
 
-int32_t main () {
+signed main () {
     ios::sync_with_stdio(0);
     cin.tie(0);
 
