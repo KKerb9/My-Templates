@@ -6,11 +6,11 @@
 // #define int long long
 #define all(x) x.begin(), x.end()
 
-#include <ext/pb_ds/assoc_container.hpp>
+// #include <ext/pb_ds/assoc_container.hpp>
 
-using namespace __gnu_pbds;
+// using namespace __gnu_pbds;
 
-using ordered_set = tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update>;
+// using ordered_set = tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update>;
 
 using namespace std;
 using ll = long long;
@@ -18,6 +18,7 @@ using ull = unsigned long long;
 using ld = long double;
 template<typename T1, typename T2>
 using pr = pair<T1, T2>;
+using pii = pair<int, int>;
 int t = 1;
 
 #ifdef LOCAL 
