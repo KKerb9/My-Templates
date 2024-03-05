@@ -5,6 +5,7 @@
 
 // #define int long long
 #define all(x) x.begin(), x.end()
+#define rall(x) x.rbegin(), x.rend()
 
 // #include <ext/pb_ds/assoc_container.hpp>
 
@@ -39,12 +40,12 @@ int t = 1;
     #define dbg(x)
 #endif
 
-void solve () {
-    
-}
-
 void prerun () {
     fi; fo; ct; cd;
+}
+
+void solve () {
+    
 }
 
 signed main () {
@@ -53,7 +54,14 @@ signed main () {
 
     prerun();
 
-    while (t--) solve();
-
+    for (int i = 1; i <= t; i++) {
+#ifdef LOCAl
+        cout << "Test case # " << i << ":\n";
+#endif
+        solve();
+#ifdef LOCAL
+        cout << "=================\n";
+#endif
+    }
     return 0;
 }
