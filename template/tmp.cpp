@@ -20,6 +20,7 @@ using ld = long double;
 template<typename T1, typename T2>
 using pr = pair<T1, T2>;
 using pii = pair<int, int>;
+const int MOD = 1e9 + 7;
 int t = 1;
 
 #ifdef LOCAL 
@@ -54,14 +55,15 @@ signed main () {
 
     prerun();
 
-    for (int i = 1; i <= t; i++) {
-#ifdef LOCAl
-        cout << "Test case # " << i << ":\n";
+    for (int i = 0; i < t; i++) {
+#ifdef LOCAL 
+        cout << "Test case #" << i + 1 << " ================" << '\n';
 #endif
         solve();
 #ifdef LOCAL
-        cout << "=================\n";
+        cout << "End Test ====================\n\n";
 #endif
     }
+
     return 0;
 }
