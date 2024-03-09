@@ -45,9 +45,19 @@ void prerun () {
     fi; fo; ct; cd;
 }
 
+template<typename T>
+inline void print (vector<T> &arr) {
+    for (auto el : arr) cout << el << ' ';
+    cout << '\n';
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
 void solve () {
     
 }
+
+////////////////////////////////////////////////////////////////////////////////////
 
 signed main () {
     ios::sync_with_stdio(0);
