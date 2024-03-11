@@ -21,29 +21,8 @@ template<typename T1, typename T2>
 using pr = pair<T1, T2>;
 using pii = pair<int, int>;
 const int MOD = 1e9 + 7;
+const int INF = 1e9;
 int t = 1;
-
-#ifdef LOCAL 
-    #define fi freopen("input.txt", "r", stdin)
-    #define fo freopen("output.txt", "w", stdout)
-    #define ct cin >> t
-#else 
-    #define fi
-    #define fo
-    #define ct
-#endif
-
-#ifdef DEBUG
-    #define cd cout << "============DEBUG===========\n";
-    #define dbg(x) cout << #x << ": " << x << '\n';
-#else
-    #define cd
-    #define dbg(x)
-#endif
-
-void prerun () {
-    fi; fo; ct; cd;
-}
 
 template<typename T>
 inline void print (vector<T> &arr) {
@@ -60,10 +39,15 @@ void solve () {
 ////////////////////////////////////////////////////////////////////////////////////
 
 signed main () {
+
+#ifdef LOCAL
+    freopen("input.txt", "r", stdin)
+    freopen("output.txt", "w", stdout)
+    cin >> t
+#endif
+
     ios::sync_with_stdio(0);
     cin.tie(0);
-
-    prerun();
 
     for (int i = 0; i < t; i++) {
 #ifdef LOCAL 
